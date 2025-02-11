@@ -11,26 +11,41 @@ function  mostPlayerOfTheMatch(matches) {
         return acc;
     }, {});
 
-    console.log(matchesBySeason);
+   // console.log(matchesBySeason);
 
-    // for (const match in matchesBySeason) {
-    //     console.log(matchesBySeason[match]);
-    //     // matchesBySeason[match].forEach(match => {
-
-    //     //   });
-
-    // }
-
-//     const map=new Map();
-//     for (const match of matches) {
-//         if(map.has(match.player_of_match)){
-//             map.set(match.player_of_match, map.get(match.player_of_match) + 1 );
-//         }
-//         else{
-//             map.set(match.player_of_match, 1);
-//         }
-//     }
-//     return map;
+    for (const season in matchesBySeason) {
+        //  console.log(season);
+        // console.log(matchesBySeason[season]);
+        const mapForSeasonAndPlayerOfTheMatch = new Map();
+        let matchesOfEachSeason = matchesBySeason[season];
+        // console.log(matchesOfEachSeason);
+        const mapForPlayer = new Map();
+        for (const match of matchesOfEachSeason) {
+            const playerOfMatch = match.player_of_match;
+            if(mapForPlayer.has(playerOfMatch)){
+                mapForPlayer.set(playerOfMatch, mapForPlayer.get(playerOfMatch) + 1);
+            }
+            else{
+                mapForPlayer.set(playerOfMatch, 1);
+            }
+        }
+        const currMostMOM =0;
+        let currMostMOMPlayer = 'BB McCullum';
+        for (const [key, value] of mapForPlayer) {
+            if(currMostMOM < value){
+                currMostMOMPlayer = key;
+            }
+        }
+        console.log(currMostMOMPlayer + " is has most man of the match award in the year "+ season);
+        // console.log(mapForPlayer);
+        console.log("---xxx-----");
+    }
 }
 
+// const arr= [
+//     {sam:22} , {gopi:7}]
+
+// arr.forEach((item, ind)=>{
+//     console.log(item);
+// })
 console.log(mostPlayerOfTheMatch(matches));
