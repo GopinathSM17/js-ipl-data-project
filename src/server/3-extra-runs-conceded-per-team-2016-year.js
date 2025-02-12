@@ -15,8 +15,7 @@ function ExtraRunsConcededPerTeamInYear2016(deliveries, matches) {
             matchIdOf2016.push(match.id);
         }
     }
-
-    const deliveriesOf2016 = deliveries.filter((delivery)=> matchIdOf2016.includes(delivery["match_id"]));
+    const deliveriesOf2016 = deliveries.filter((delivery) => matchIdOf2016.includes(delivery["match_id"]));
     let extraRuns;
     for (const eachDelivery of deliveriesOf2016) {
         if(map.has(eachDelivery.bowling_team)){

@@ -15,4 +15,10 @@ function matchesWonPerTeamPerYear(matches) {
     return map;
 }
 
+
+const matchesWonPerTeamPerYearInIPL =  matches.reduce((matchPerSeason, match) => {
+    
+} , {} );
+
+// console.log(matchesWonPerTeamPerYearInIPL);
 console.log(matchesWonPerTeamPerYear(matches));

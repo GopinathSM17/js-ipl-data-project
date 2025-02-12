@@ -18,5 +18,15 @@ const matchesPerYear = function (matches) {
     return map;
 }
 
-console.log(matchesPerYear(matches));
+const matchesPerYearInIPL = matches.reduce( (yearAndMatch, match) => {
+    if(yearAndMatch[match.season]){
+        yearAndMatch[match.season] += 1;
+    }
+    else{
+        yearAndMatch[match.season] = 1;
+    }
+    return yearAndMatch;
+}, {});
+console.log(matchesPerYearInIPL);
+// console.log(matchesPerYear(matches));
 
