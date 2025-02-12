@@ -16,9 +16,19 @@ function matchesWonPerTeamPerYear(matches) {
 }
 
 
-const matchesWonPerTeamPerYearInIPL =  matches.reduce((matchPerSeason, match) => {
-    
+const matchesWonPerTeamPerYearInIPL =  matches.reduce((matchPerSeasonPerTeam, match) => {
+    const team = match.winner;
+    const year = match.season;
+
+    if( ! matchPerSeasonPerTeam[year]){
+        matchPerSeasonPerTeam[year] = {};
+    }
+    if( ! matchPerSeasonPerTeam[year][team]){
+        matchPerSeasonPerTeam[year][team] = 0;
+    }
+    matchPerSeasonPerTeam[year][team] +=  1;
+    return matchPerSeasonPerTeam
 } , {} );
 
-// console.log(matchesWonPerTeamPerYearInIPL);
-console.log(matchesWonPerTeamPerYear(matches));
+console.log(matchesWonPerTeamPerYearInIPL);
+// console.log(matchesWonPerTeamPerYear(matches));
