@@ -42,4 +42,15 @@ function  mostPlayerOfTheMatch(matches) {
     }
 }
 
-console.log(mostPlayerOfTheMatch(matches));
+const mostPlayerOfTheMatchInIPL = matches.reduce((acc, match) => {
+    if(acc[match.player_of_match]){
+        acc[match.player_of_match] += 1; 
+    }
+    else{
+        acc[match.player_of_match] = 1;
+    }
+    return acc;
+}, {});
+
+console.log(mostPlayerOfTheMatchInIPL);
+// console.log(mostPlayerOfTheMatch(matches));

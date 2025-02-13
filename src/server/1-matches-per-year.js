@@ -29,5 +29,5 @@ const matchesPerYearInIPL = matches.reduce( (yearAndMatch, match) => {
 }, {});
 console.log(matchesPerYearInIPL);
 
-console.log(matchesPerYear(matches));
+// console.log(matchesPerYear(matches));
 
