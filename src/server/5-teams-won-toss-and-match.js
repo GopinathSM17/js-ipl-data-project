@@ -3,15 +3,15 @@ import {
 } from '../data/matches.js'
 
 function teamsWonTossAndMatch(matches) {
-    const map= new Map();
+    const map = new Map();
     for (const match of matches) {
-        let tossWinner= match.toss_winner;
+        let tossWinner = match.toss_winner;
         let matchWinner = match.winner;
-        if(tossWinner == matchWinner){
-            if(map.has(matchWinner)){
-                map.set(matchWinner, map.get(matchWinner)+1);
+        if (tossWinner == matchWinner) {
+            if (map.has(matchWinner)) {
+                map.set(matchWinner, map.get(matchWinner) + 1);
             }
-            else{
+            else {
                 map.set(matchWinner, 1);
             }
         }

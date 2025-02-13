@@ -42,10 +42,4 @@ function  mostPlayerOfTheMatch(matches) {
     }
 }
 
-// const arr= [
-//     {sam:22} , {gopi:7}]
-
-// arr.forEach((item, ind)=>{
-//     console.log(item);
-// })
 console.log(mostPlayerOfTheMatch(matches));
