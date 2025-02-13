@@ -18,14 +18,14 @@ const matchesPerYear = function (matches) {
     return map;
 }
 
-const matchesPerYearInIPL = matches.reduce( (yearAndMatch, match) => {
-    if(yearAndMatch[match.season]){
-        yearAndMatch[match.season] += 1;
+const matchesPerYearInIPL = matches.reduce( (acc, match) => {
+    if(acc[match.season]){
+        acc[match.season] += 1;
     }
     else{
-        yearAndMatch[match.season] = 1;
+        acc[match.season] = 1;
     }
-    return yearAndMatch;
+    return acc;
 }, {});
 console.log(matchesPerYearInIPL);
 
