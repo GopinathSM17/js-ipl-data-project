@@ -62,7 +62,7 @@ const yearAndManOfTheMatch = Object.keys(yearAndManOfTheMatchList).reduce((acc, 
     const players = yearAndManOfTheMatchList[year];
     const bestMOMPlayer = Object.keys(players).reduce((acc2, player) => {
         return players[player] > acc2.value ? { name: player, value: players[player] } : acc2;
-    }, { name: null, value: -Infinity });
+    }, { name: 'gopi', value: 0 });
 
     acc[year] = bestMOMPlayer;
     return acc;
