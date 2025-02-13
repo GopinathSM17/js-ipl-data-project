@@ -52,4 +52,37 @@ function bestEconomyBowlerInSuperOver(deliveries) {
     // console.log(mapforTotalBalls);
 }
 
-console.log(bestEconomyBowlerInSuperOver(deliveries));
+const allTheSuperOverBalls = deliveries.reduce((acc , delivery)=> {
+    if(delivery.is_super_over === "1"){
+
+        acc.push(delivery);
+    }
+    return acc;
+}, []);
+
+
+
+// console.log(allTheSuperOverBalls);
+
+const bowlersAndRuns =  allTheSuperOverBalls.reduce((acc, delivery)=> {
+    if(acc[delivery.bowler]){
+        acc[delivery.bowler] += parseInt(delivery.total_runs);
+    }
+    else{
+        acc[delivery.bowler] = parseInt(delivery.total_runs);
+    }
+    return acc;
+}, {});
+
+const bestBowlerInSuperOver = Object.keys(bowlersAndRuns).reduce((acc, bowler)=>{
+    if(acc [1] > bowlersAndRuns[bowler]){
+       acc[0] = bowler;
+       acc[1] =  bowlersAndRuns[bowler];
+    }
+    return acc;
+}, ["" , 100]);
+
+
+
+console.log(bestBowlerInSuperOver);
+// console.log(bestEconomyBowlerInSuperOver(deliveries));
