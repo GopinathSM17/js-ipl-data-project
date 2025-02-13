@@ -10,12 +10,8 @@ function  mostPlayerOfTheMatch(matches) {
         acc[match.season].push(match);
         return acc;
     }, {});
-
-   // console.log(matchesBySeason);
-
+    
     for (const season in matchesBySeason) {
-        //  console.log(season);
-        // console.log(matchesBySeason[season]);
         const mapForSeasonAndPlayerOfTheMatch = new Map();
         let matchesOfEachSeason = matchesBySeason[season];
         // console.log(matchesOfEachSeason);
