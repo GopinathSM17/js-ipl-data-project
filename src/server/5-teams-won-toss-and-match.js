@@ -33,4 +33,4 @@ const teamsWonTossAndMatchInIPL = matches.reduce((acc, match) => {
 
 console.log(teamsWonTossAndMatchInIPL);
 
-console.log(teamsWonTossAndMatch(matches));
+// console.log(teamsWonTossAndMatch(matches));

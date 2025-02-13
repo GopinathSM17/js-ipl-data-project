@@ -31,4 +31,4 @@ const matchesWonPerTeamPerYearInIPL =  matches.reduce((acc, match) => {
 
 console.log(matchesWonPerTeamPerYearInIPL);
 
-console.log(matchesWonPerTeamPerYear(matches));
+// console.log(matchesWonPerTeamPerYear(matches));
