@@ -38,7 +38,6 @@ const myFunction = (deliveries, batsman) => {
         }
         return acc;
     }, []);
-
     const result = totalDeliveryOfThePlayer.reduce((acc, delivery) => {
         const matchIdOfTheDelivery = delivery.match_id;
         const season = matches[matchIdOfTheDelivery].season;
