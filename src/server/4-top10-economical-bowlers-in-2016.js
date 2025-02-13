@@ -60,4 +60,30 @@ function top10EconomicalBowlersIn2016(deliveries, matches) {
 
 }
 
-console.log(top10EconomicalBowlersIn2016(deliveries, matches));
+function mySolution(deliveries, matches, year) {
+    const deliveriesOfYear = deliveries.reduce((acc, delivery)=> {
+        const matchIdOfTheDelivery = delivery.match_id;
+        const match =  matches.find(m => m.id === matchIdOfTheDelivery);
+        const season = match.season;
+        if( season === year){
+            acc.push(delivery);
+        }
+        return acc;
+    }, []);
+    const bowlersAndEconomy = deliveriesOfYear.reduce((acc, delivery) =>{
+        if(acc[delivery.bowler]){
+            acc[delivery.bowler] += Number(delivery.total_runs);
+        }
+        else{
+            acc[delivery.bowler] = Number(delivery.total_runs);
+        }
+        return acc;
+    }, {});
+
+    const top10Bowler = Object.entries(bowlersAndEconomy).sort((a, b) => a[1] - b[1]).slice(0,10);
+    return top10Bowler;
+
+}
+console.log(mySolution(deliveries, matches, "2015"));
+
+// console.log(top10EconomicalBowlersIn2016(deliveries, matches));
