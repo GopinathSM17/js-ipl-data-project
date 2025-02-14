@@ -1,34 +1,20 @@
 import { matches } from "../data/matches.js";
 
-function matchesWonPerTeamPerYear(matches) {
-    const map = new Map();
-    let counter;
-    // const filteredMatches = matches.filter(match => match.year === 2020);
-    for (const match of matches) {
-        if (map.has(match.winner)) {
-            map.set(match.winner, map.get(match.winner) + 1);
+const matchesWonPerTeamPerYearInIPL = (matches) => {
+    const matchesWonPerTeamPerYear = matches.reduce((acc, match) => {
+        const team = match.winner;
+        const year = match.season;
+
+        if (!acc[year]) {
+            acc[year] = {};
         }
-        else {
-            map.set(match.winner, 1);
+        if (!acc[year][team]) {
+            acc[year][team] = 0;
         }
-    }
-    return map;
+        acc[year][team] += 1;
+        return acc
+    }, {});
+    return matchesWonPerTeamPerYear
 }
 
-const matchesWonPerTeamPerYearInIPL =  matches.reduce((acc, match) => {
-    const team = match.winner;
-    const year = match.season;
-
-    if( ! acc[year]){
-        acc[year] = {};
-    }
-    if( ! acc[year][team]){
-        acc[year][team] = 0;
-    }
-    acc[year][team] +=  1;
-    return acc
-} , {} );
-
-console.log(matchesWonPerTeamPerYearInIPL);
-
-// console.log(matchesWonPerTeamPerYear(matches));
+console.log(matchesWonPerTeamPerYearInIPL(matches));

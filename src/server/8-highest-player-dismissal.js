@@ -55,4 +55,5 @@ function highestPlayerDismissal(matches, deliveries) {
   );
   return highestDismissal;
 };
+
 console.log(highestPlayerDismissal(matches, deliveries));
