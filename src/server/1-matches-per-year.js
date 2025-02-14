@@ -1,5 +1,3 @@
-//const matches = require('../data/matches');
-//console.log(matches);
 import { matches } from "../data/matches.js";
 
 const matchesPerYear = function (matches) {

@@ -2,17 +2,22 @@ import { matches } from "../data/matches.js";
 
 function matchesWonPerTeamPerYear(matches) {
     const map = new Map();
-    let counter;
-    // const filteredMatches = matches.filter(match => match.year === 2020);
-    for (const match of matches) {
-        if (map.has(match.winner)) {
-            map.set(match.winner, map.get(match.winner) + 1);
+
+    const matchesPerSeason = {};
+    for(const match of matches){
+        if(matchesPerSeason[match.season]){
+            if(matchesPerSeason[match.season][match.winner]){
+                matchesPerSeason[match.season][match.winner] += 1;
+            }
+            else{
+                matchesPerSeason[match.season][match.winner] = 1;
+            }
         }
-        else {
-            map.set(match.winner, 1);
+        else{
+            matchesPerSeason[match.season] = {};
         }
     }
-    return map;
+    return matchesPerSeason;
 }
 
 console.log(matchesWonPerTeamPerYear(matches));
