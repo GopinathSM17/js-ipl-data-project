@@ -21,5 +21,19 @@ const matchesPerYear = function () {
     return map;
 }
 
-console.log(matchesPerYear());
+const matchesPerYearLoop = ()=>{
+    const matches= CsvToJson("../data/matches.csv");
+    const year = {};
+    for (const match of matches) {
+        if(year[match.season] == undefined){
+            year[match.season] = 0;
+        }
+        else{
+            year[match.season] 
+        } 
+    }
+}
+console.log(matchesPerYearLoop());
+
+// console.log(matchesPerYear());
 
