@@ -1,13 +1,18 @@
-import {
-    deliveries,
-} from '../data/deliveries.js'
+// import {
+//     deliveries,
+// } from '../data/deliveries.js'
 
-import{
-    matches
-} from '../data/matches.js'
+// import{
+//     matches
+// } from '../data/matches.js'
+
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
 
 
-function ExtraRunsConcededPerTeamInYear2016(deliveries, matches) {
+function ExtraRunsConcededPerTeamInYear2016() {
+    const matches = CsvToJson("../data/matches.csv");
+    const deliveries = CsvToJson("../data/deliveries.csv");
     const map=new Map();
     const matchIdOf2016=[];
     for (const match of matches) {
@@ -27,8 +32,10 @@ function ExtraRunsConcededPerTeamInYear2016(deliveries, matches) {
             map.set(eachDelivery.bowling_team, extraRuns);
         }
     }
+    writeToFile("3_extra_runs_conceded_per_team_2016_year", JSON.stringify(map,null,2));
+
     return map;
 }
 
 
-console.log(ExtraRunsConcededPerTeamInYear2016(deliveries,matches));
+console.log(ExtraRunsConcededPerTeamInYear2016());

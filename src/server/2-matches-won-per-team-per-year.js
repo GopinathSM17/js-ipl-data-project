@@ -1,8 +1,11 @@
-import { matches } from "../data/matches.js";
+// import { matches } from "../data/matches.js";
 
-function matchesWonPerTeamPerYear(matches) {
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+function matchesWonPerTeamPerYear() {
+    const matches = CsvToJson("../data/matches.csv");
     const map = new Map();
-
     const matchesPerSeason = {};
     for(const match of matches){
         if(matchesPerSeason[match.season]){
@@ -17,7 +20,9 @@ function matchesWonPerTeamPerYear(matches) {
             matchesPerSeason[match.season] = {};
         }
     }
+    writeToFile("2_matches_won_per_team_per_year", JSON.stringify(matchesPerSeason,null,2));
+
     return matchesPerSeason;
 }
 
-console.log(matchesWonPerTeamPerYear(matches));
+console.log(matchesWonPerTeamPerYear());

@@ -1,8 +1,12 @@
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
-function teamsWonTossAndMatch(matches) {
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+function teamsWonTossAndMatch() {
+    const matches = CsvToJson("../data/matches.csv");
     const map = new Map();
     for (const match of matches) {
         let tossWinner = match.toss_winner;
@@ -16,7 +20,8 @@ function teamsWonTossAndMatch(matches) {
             }
         }
     }
+    writeToFile("5_teams_won_toss_and_match", JSON.stringify(map,null,2));
     return map;
 }
 
-console.log(teamsWonTossAndMatch(matches));
+console.log(teamsWonTossAndMatch());

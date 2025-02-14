@@ -1,12 +1,20 @@
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
-import{
-    deliveries
-} from '../data/deliveries.js'
+// import{
+//     deliveries
+// } from '../data/deliveries.js'
 
-function strikeRateOfBatsmanEachSeason(deliveries, batsman, matches) {
+
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+
+function strikeRateOfBatsmanEachSeason(batsman) {
+    const matches = CsvToJson("../data/matches.csv");
+    const deliveries = CsvToJson("../data/deliveries.csv");
+
     // const batsman = "SK Raina";
     var batsmansOverallDelivery=[];
     for (const delivery of deliveries) {
@@ -26,7 +34,8 @@ function strikeRateOfBatsmanEachSeason(deliveries, batsman, matches) {
             map.set(currMatch.season, parseInt(delivery.total_runs));
         }
     }
-    console.log(map);
+    writeToFile("7_strike_rate_of_batsman_each_season", JSON.stringify(map,null,2));
+    return map;
 }
 
-strikeRateOfBatsmanEachSeason(deliveries, "SK Raina", matches);
+console.log(strikeRateOfBatsmanEachSeason("SK Raina"));

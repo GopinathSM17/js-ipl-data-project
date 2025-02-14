@@ -1,6 +1,10 @@
-import { matches } from "../data/matches.js";
+// import { matches } from "../data/matches.js";
 
-const matchesPerYear = function (matches) {
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+const matchesPerYear = function () {
+    const matches = CsvToJson("../data/matches.csv");
     let matchCount = 0;
     const map = new Map();
     for (const element of matches) {
@@ -13,8 +17,9 @@ const matchesPerYear = function (matches) {
             map.set(element.season, matchCount);
         }
     }
+    writeToFile("1_matches_per_year", JSON.stringify(map,null,2));
     return map;
 }
 
-console.log(matchesPerYear(matches));
+console.log(matchesPerYear());
 

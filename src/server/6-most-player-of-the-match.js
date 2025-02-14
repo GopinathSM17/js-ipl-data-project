@@ -1,8 +1,12 @@
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
-function  mostPlayerOfTheMatch(matches) {
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+function  mostPlayerOfTheMatch() {
+    const matches = CsvToJson("../data/matches.csv");
     const matchesBySeason = matches.reduce((acc, match) => {
         if(!acc[match.season]){
             acc[match.season]=[];
@@ -37,7 +41,8 @@ function  mostPlayerOfTheMatch(matches) {
         yearAndMOMPlayers[season] = currMostMOMPlayer
 
     }
-    return yearAndMOMPlayers
+    writeToFile("6_most_player_of_the_match", JSON.stringify(yearAndMOMPlayers,null,2));
+    return yearAndMOMPlayers;
 }
 
-console.log(mostPlayerOfTheMatch(matches));
+console.log(mostPlayerOfTheMatch());

@@ -1,14 +1,18 @@
-import {
-    deliveries,
-} from '../data/deliveries.js'
+// import {
+//     deliveries,
+// } from '../data/deliveries.js'
 
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
 
-function top10EconomicalBowlersIn2016(deliveries, matches) {
-    
+function top10EconomicalBowlersIn2016() {
+    const matches = CsvToJson("../data/matches.csv");
+    const deliveries = CsvToJson("../data/deliveries.csv");
+
     const matchIdOf2015 = [];
     for (const match of matches) {
         if (match.season == "2015") {
@@ -56,8 +60,10 @@ function top10EconomicalBowlersIn2016(deliveries, matches) {
             break
         }
     }
+
+    writeToFile("4_top10_economical_bowlers_in_2016", JSON.stringify(top10Bowler,null,2));
     return top10Bowler;
 
 }
 
-console.log(top10EconomicalBowlersIn2016(deliveries, matches));
+console.log(top10EconomicalBowlersIn2016());
