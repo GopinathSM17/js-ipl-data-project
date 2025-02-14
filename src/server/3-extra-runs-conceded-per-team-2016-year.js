@@ -32,7 +32,7 @@ function ExtraRunsConcededPerTeamInYear2016() {
             map.set(eachDelivery.bowling_team, extraRuns);
         }
     }
-    writeToFile("3_extra_runs_conceded_per_team_2016_year", JSON.stringify(map,null,2));
+    writeToFile("3_extra_runs_conceded_per_team_2016_year", JSON.stringify(Object.fromEntries(map),null,2));
 
     return map;
 }

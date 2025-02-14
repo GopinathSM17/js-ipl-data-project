@@ -34,7 +34,7 @@ function strikeRateOfBatsmanEachSeason(batsman) {
             map.set(currMatch.season, parseInt(delivery.total_runs));
         }
     }
-    writeToFile("7_strike_rate_of_batsman_each_season", JSON.stringify(map,null,2));
+    writeToFile("7_strike_rate_of_batsman_each_season", JSON.stringify(Object.fromEntries(map),null,2));
     return map;
 }
 

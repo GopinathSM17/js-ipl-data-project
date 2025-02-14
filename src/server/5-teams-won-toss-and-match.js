@@ -20,7 +20,7 @@ function teamsWonTossAndMatch() {
             }
         }
     }
-    writeToFile("5_teams_won_toss_and_match", JSON.stringify(map,null,2));
+    writeToFile("5_teams_won_toss_and_match", JSON.stringify(Object.fromEntries(map),null,2));
     return map;
 }
 

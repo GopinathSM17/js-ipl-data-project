@@ -17,7 +17,7 @@ const matchesPerYear = function () {
             map.set(element.season, matchCount);
         }
     }
-    writeToFile("1_matches_per_year", JSON.stringify(map,null,2));
+    writeToFile("1_matches_per_year", JSON.stringify(Object.fromEntries(map),null,2));
     return map;
 }
 
