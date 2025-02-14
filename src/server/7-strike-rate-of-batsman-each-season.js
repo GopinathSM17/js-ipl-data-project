@@ -1,12 +1,17 @@
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
-import {
-    deliveries
-} from '../data/deliveries.js'
+// import {
+//     deliveries
+// } from '../data/deliveries.js'
 
-const strikeRateOfBatsmanEachSeason = (deliveries, batsman) => {
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+const strikeRateOfBatsmanEachSeason = (batsman) => {
+    const matches = CsvToJson("../data/matches.csv");
+    const deliveries = CsvToJson("../data/deliveries.csv")
 
     const totalDeliveryOfThePlayer= deliveries.reduce((acc, delivery) => {
         if (delivery.batsman == batsman) {
@@ -26,7 +31,8 @@ const strikeRateOfBatsmanEachSeason = (deliveries, batsman) => {
         }
         return acc;
     }, {});
+    writeToFile("7_strike_rate_of_batsman_each_season", JSON.stringify(result,null,2));
     return result;
 }
 
-console.log(strikeRateOfBatsmanEachSeason(deliveries, "SK Raina"));
+console.log(strikeRateOfBatsmanEachSeason("SK Raina"));

@@ -1,6 +1,11 @@
-import { matches } from "../data/matches.js";
+// import { matches } from "../data/matches.js";
 
-const matchesWonPerTeamPerYearInIPL = (matches) => {
+
+const  {CsvToJson } = require("./csvToJson");
+const  {writeToFile}  = require("./writeToFile");
+
+const matchesWonPerTeamPerYearInIPL = () => {
+    const matches = CsvToJson("../data/matches.csv");
     const matchesWonPerTeamPerYear = matches.reduce((acc, match) => {
         const team = match.winner;
         const year = match.season;
@@ -14,7 +19,9 @@ const matchesWonPerTeamPerYearInIPL = (matches) => {
         acc[year][team] += 1;
         return acc
     }, {});
-    return matchesWonPerTeamPerYear
+    writeToFile("2_matches_won_per_team_per_year", JSON.stringify(matchesWonPerTeamPerYear,null,2));
+
+   return matchesWonPerTeamPerYear;
 }
 
-console.log(matchesWonPerTeamPerYearInIPL(matches));
+console.log(matchesWonPerTeamPerYearInIPL());

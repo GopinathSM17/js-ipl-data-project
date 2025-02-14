@@ -1,12 +1,20 @@
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
-import {
-    deliveries
-} from '../data/deliveries.js'
+// import {
+//     deliveries
+// } from '../data/deliveries.js'
 
-function highestPlayerDismissal(matches, deliveries) {
+
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+
+function highestPlayerDismissal() {
+  const matches = CsvToJson("../data/matches.csv");
+    const deliveries = CsvToJson("../data/deliveries.csv")
+
     const dismissals = deliveries.reduce((acc, delivery) => {
         if (delivery.player_dismissed) {
           if (acc[delivery.bowler] === undefined) {
@@ -53,7 +61,8 @@ function highestPlayerDismissal(matches, deliveries) {
       dismissals: 0,
     }
   );
+  writeToFile("8_highest_player_dismissal", JSON.stringify(highestDismissal,null,2));
   return highestDismissal;
 };
 
-console.log(highestPlayerDismissal(matches, deliveries));
+console.log(highestPlayerDismissal());

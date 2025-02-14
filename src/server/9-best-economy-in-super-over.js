@@ -1,13 +1,18 @@
-import {
-    matches
-} from '../data/matches.js'
+// import {
+//     matches
+// } from '../data/matches.js'
 
-import {
-    deliveries
-} from '../data/deliveries.js'
+// import {
+//     deliveries
+// } from '../data/deliveries.js'
 
 
-const bestEconomyInSuperOver = (matches, deliveries) => {
+const { CsvToJson } = require("./csvToJson");
+const { writeToFile } = require("./writeToFile");
+
+const bestEconomyInSuperOver = () => {
+    const matches = CsvToJson("../data/matches.csv");
+    const deliveries = CsvToJson("../data/deliveries.csv")
     const allTheSuperOverBalls = deliveries.reduce((acc, delivery) => {
         if (delivery.is_super_over === "1") {
 
@@ -53,7 +58,8 @@ const bestEconomyInSuperOver = (matches, deliveries) => {
         }
         return acc;
     }, ["", 100]);
+    writeToFile("9_best_economy_in_super_over", JSON.stringify(bestBowlerInSuperOver,null,2));
     return bestBowlerInSuperOver;
 }
 
-console.log(bestEconomyInSuperOver(matches,deliveries));
+console.log(bestEconomyInSuperOver());
