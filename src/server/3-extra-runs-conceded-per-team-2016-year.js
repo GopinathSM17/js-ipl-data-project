@@ -9,33 +9,32 @@
 const { CsvToJson } = require("./csvToJson");
 const { writeToFile } = require("./writeToFile");
 
-
-function ExtraRunsConcededPerTeamInYear2016() {
+const ExtraRunsConcededPerTeamInYear2016IPL = ()=>{
     const matches = CsvToJson("../data/matches.csv");
     const deliveries = CsvToJson("../data/deliveries.csv");
-    const map=new Map();
-    const matchIdOf2016=[];
+
+    const matchIdOf2016 = [];
     for (const match of matches) {
         if(match.season == "2016"){
             matchIdOf2016.push(match.id);
         }
     }
-    const deliveriesOf2016 = deliveries.filter((delivery) => matchIdOf2016.includes(delivery["match_id"]));
-    let extraRuns;
-    for (const eachDelivery of deliveriesOf2016) {
-        if(map.has(eachDelivery.bowling_team)){
-            extraRuns = parseInt(eachDelivery.extra_runs , 10);
-            map.set(eachDelivery.bowling_team, map.get(eachDelivery.bowling_team)+ extraRuns);
-        }
-        else{
-            extraRuns =  parseInt(eachDelivery.extra_runs , 10);
-            map.set(eachDelivery.bowling_team, extraRuns);
-        }
-    }
-    writeToFile("3_extra_runs_conceded_per_team_2016_year", JSON.stringify(Object.fromEntries(map),null,2));
 
-    return map;
+    const  teamAndExtraRuns = {}
+    for (const matchId of matchIdOf2016) {
+        for(const delivery of deliveries){
+            if(delivery.match_id == matchId ){
+                if(teamAndExtraRuns[delivery.bowling_team]){
+                    teamAndExtraRuns[delivery.bowling_team] += Number(delivery.extra_runs, 2);
+                }
+                else{
+                    teamAndExtraRuns[delivery.bowling_team] = Number(delivery.extra_runs, 2);
+                }
+            }
+        }        
+    }
+    writeToFile("3_extra_runs_conceded_per_team_2016_year", JSON.stringify(teamAndExtraRuns,null,2));
+    return teamAndExtraRuns;
 }
 
-
-console.log(ExtraRunsConcededPerTeamInYear2016());
+console.log(ExtraRunsConcededPerTeamInYear2016IPL());

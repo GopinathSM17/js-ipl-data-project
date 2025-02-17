@@ -5,23 +5,23 @@
 const { CsvToJson } = require("./csvToJson");
 const { writeToFile } = require("./writeToFile");
 
-function teamsWonTossAndMatch() {
+const teamsWonTossAndMatchInIPL = ()=>{
     const matches = CsvToJson("../data/matches.csv");
-    const map = new Map();
+
+    const teamsWonBoth = {};
+
     for (const match of matches) {
-        let tossWinner = match.toss_winner;
-        let matchWinner = match.winner;
-        if (tossWinner == matchWinner) {
-            if (map.has(matchWinner)) {
-                map.set(matchWinner, map.get(matchWinner) + 1);
+        if(match.toss_winner == match.winner){
+            if(teamsWonBoth[match.winner]){
+                teamsWonBoth[match.winner] += 1;
             }
-            else {
-                map.set(matchWinner, 1);
+            else{
+                teamsWonBoth[match.winner] = 1;
             }
         }
     }
-    writeToFile("5_teams_won_toss_and_match", JSON.stringify(Object.fromEntries(map),null,2));
-    return map;
+    writeToFile("5_teams_won_toss_and_match", JSON.stringify(teamsWonBoth,null,2));
+    return teamsWonBoth;
 }
 
-console.log(teamsWonTossAndMatch());
+console.log(teamsWonTossAndMatchInIPL());

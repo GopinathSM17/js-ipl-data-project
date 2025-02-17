@@ -45,4 +45,37 @@ function  mostPlayerOfTheMatch() {
     return yearAndMOMPlayers;
 }
 
-console.log(mostPlayerOfTheMatch());
+const mostPlayerOfTheMatchInEachSeason = ()=>{
+    const matches = CsvToJson("../data/matches.csv");
+    const yearAndMOMPlayers = {};
+    for (const match of matches) {        
+        if(yearAndMOMPlayers[match.season] === undefined){
+            yearAndMOMPlayers[match.season] = {};
+        }
+        else{
+            if(yearAndMOMPlayers[match.season][match.player_of_match]){
+                yearAndMOMPlayers[match.season][match.playerOfMatch] = 1;
+            }
+            else{
+                yearAndMOMPlayers[match.season][match.playerOfMatch] += 1;
+            }
+        }
+    }
+    console.log(yearAndMOMPlayers);
+    
+    const yearAndMostMOMPlayer = {};
+    for (const year of yearAndMOMPlayers) {
+        let mostMOMPlayer;
+        let MOMCount = 0;
+        for(let player of year){
+            if(yearAndMOMPlayers[year][player]  > MOMCount){
+                MOMCount = yearAndMOMPlayers[year][player];
+                mostMOMPlayer = player;
+            }
+        }
+        yearAndMostMOMPlayer[mostMOMPlayer] = MOMCount;
+    }
+    return yearAndMostMOMPlayer;
+}
+
+console.log(mostPlayerOfTheMatchInEachSeason());
