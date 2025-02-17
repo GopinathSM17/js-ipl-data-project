@@ -10,49 +10,58 @@
 const { CsvToJson } = require("./csvToJson");
 const { writeToFile } = require("./writeToFile");
 
-
-function bestEconomyBowlerInSuperOver() {
-    const matches = CsvToJson("../data/matches.csv");
+const bestEconomyBowlerInSuperOverInIPL = () => {
     const deliveries = CsvToJson("../data/deliveries.csv");
-    let superOverballs = [];
+
+    const superOverballs = [];
+
     for (const delivery of deliveries) {
-        if (delivery.is_super_over == '1') {
+        if (delivery.is_super_over === "1") {
             superOverballs.push(delivery);
         }
     }
 
-    const mapforTotalRuns = new Map();
+    const bowlerAndRuns = {};
+    const bowlerAndBalls = {};
+
     for (const delivery of superOverballs) {
-        if (mapforTotalRuns.has(delivery.bowler)) {
-            mapforTotalRuns.set(delivery.bowler, mapforTotalRuns.get(delivery.bowler) + parseInt(delivery.total_runs));
+        if (bowlerAndRuns[delivery.bowler]) {
+            bowlerAndRuns[delivery.bowler] += Number(delivery.total_runs);
         }
         else {
-            mapforTotalRuns.set(delivery.bowler, 0);
+            bowlerAndRuns[delivery.bowler] = Number(delivery.total_runs);
+        }
+    }
+    for (const delivery of superOverballs) {
+        if (bowlerAndBalls[delivery.bowler]) {
+            bowlerAndBalls[delivery.bowler] += 1;
+        }
+        else {
+            bowlerAndBalls[delivery.bowler] = 1;
         }
     }
 
-    const mapforTotalBalls = new Map();
-    for (const delivery of superOverballs) {
-        if (mapforTotalBalls.has(delivery.bowler)) {
-            mapforTotalBalls.set(delivery.bowler, mapforTotalBalls.get(delivery.bowler) + 1);
-        }
-        else {
-            mapforTotalBalls.set(delivery.bowler, 0);
-        }
+    const bowlerAndEconomy = {};
+    for (const bowler in bowlerAndBalls) {
+        const balls = bowlerAndBalls[bowler];
+        const overs = balls / 6;
+        const runs = bowlerAndRuns[bowler];
+        const economy = runs / overs;
+        bowlerAndEconomy[bowler] = economy;
     }
-    let bestBowlerInSuperOverEconomy = 100;
-    let bestBowlerInSuperOver
-    for (const bowler of mapforTotalBalls.keys()) {
-        const overs = mapforTotalBalls.get(bowler) / 6;
-        const economy = mapforTotalRuns.get(bowler) / overs;
-        if (economy < bestBowlerInSuperOverEconomy) {
-            bestBowlerInSuperOverEconomy = economy
-            bestBowlerInSuperOver = bowler;
-        }
 
+    let topPlayer;
+    let topEconomy = 100;
+    for (const bowler in bowlerAndEconomy) {
+        const economy = bowlerAndEconomy[bowler];
+        if(topEconomy > economy){
+            topPlayer = bowler;            
+            topEconomy = economy;
+        }
     }
-    writeToFile("9_best_economy_in_super_over", JSON.stringify(bestBowlerInSuperOver,null,2));
-    return bestBowlerInSuperOver;
+    const result = {};
+    result[topPlayer] = topEconomy;
+    return result;
 }
 
-console.log(bestEconomyBowlerInSuperOver());
+console.log(bestEconomyBowlerInSuperOverInIPL());
