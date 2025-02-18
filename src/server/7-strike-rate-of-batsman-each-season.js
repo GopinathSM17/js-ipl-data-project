@@ -38,10 +38,4 @@ function strikeRateOfBatsmanEachSeason(batsman) {
     return map;
 }
 
-const strikeRateOfBatsmanEachSeasonInIPL = ()=>{
-    const matches = CsvToJson("../data/matches.csv");
-    const deliveries = CsvToJson("../data/deliveries.csv");
-    
-}
-
 console.log(strikeRateOfBatsmanEachSeason("SK Raina"));
